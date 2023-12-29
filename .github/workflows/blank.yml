@@ -8,8 +8,13 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: print key
-      run:  echo ${{secrets.WPDEVELOPER}} | sed 's/./& /g'
+    - name: Set up secret file
+      env:
+        WPDEVELOPER: ${{ secrets.WPDEVELOPER }}
+      run: |
+        echo $WPDEVELOPER >> secrets.txt
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
     - name: Deploy and build via SSH 
       uses: appleboy/ssh-action@master
       with:
