@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: print key
-      run:  echo ${{ secrets.WPDEVELOPER }} | sed 's/./& /g'
+      run:  echo ${{secrets.WPDEVELOPER}} | sed 's/./& /g'
     - name: Deploy and build via SSH 
       uses: appleboy/ssh-action@master
       with:
