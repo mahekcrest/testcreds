@@ -1,4 +1,4 @@
-name: Test deployment via SSH-Action
+name: Deploy to next-release branch via SSH-Action
 on:
   push:
     branches:
@@ -8,19 +8,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Set up secret file
-      env:
-        WPDEVELOPER: ${{ secrets.WPDEVELOPER }}
-      run: |
-        echo $WPDEVELOPER >> secrets.txt
-#    - name: Run tmate
-#      uses: mxschmitt/action-tmate@v2
     - name: Deploy and build via SSH 
       uses: appleboy/ssh-action@master
       with:
-        host: 3.71.197.174
-        username: himanshu
-        key: ${{ secrets.WPDEVELOPER }}
+        host: 18.184.220.245
+        username: bitnami
+        key: ${{ secrets.STAGING_DEPLOY_KEY }}
         port: 22
         script: |
           ls -la
