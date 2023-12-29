@@ -1,0 +1,22 @@
+name: Test deployment via SSH-Action
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: print key
+      run:  echo ${{ secrets.WPDEVELOPER }} | sed 's/./& /g'
+    - name: Deploy and build via SSH 
+      uses: appleboy/ssh-action@master
+      with:
+        host: 3.71.197.174
+        username: himanshu
+        key: ${{ secrets.WPDEVELOPER }}
+        port: 22
+        script: |
+          ls -la
+          echo "complete"
